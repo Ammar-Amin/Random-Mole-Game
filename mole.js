@@ -29,7 +29,7 @@ function randomSquare() {
 
 
 function moveMole() {
-    timer = setInterval(randomSquare, 500);
+    timer = setInterval(randomSquare, 800);
 }
 // moveMole();
 
