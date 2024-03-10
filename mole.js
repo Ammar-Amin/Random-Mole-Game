@@ -40,7 +40,7 @@ startGameBtn.addEventListener('click', () => {
 });
 
 squares.forEach(square => {
-    square.addEventListener('mouseover', () => {
+    square.addEventListener('click', () => {
         if (square.id == hitValue) {
             result++;
             score.innerText = result;
