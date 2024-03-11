@@ -6,13 +6,32 @@ const mole = document.querySelector('.mole');
 const gameInfo = document.querySelector('#info')
 const newGameBtn = document.querySelector('.newGame');
 const startGameBtn = document.querySelector('.startGame');
+const ulLevelsBtn = document.querySelector('.btn-group');
 
 let hitValue;
 let result = 0;
 let currentTime = 30;
 let timer = null;
 let countDownBegins = null
+let duration = 1000;
 
+
+let levelsBtn = document.querySelectorAll('.dropdown-item');
+levelsBtn.forEach((btn) => btn.addEventListener('click', function (e) {
+    // console.log(e.target.id);
+    let level = e.target.id;
+    if (level == 1) {
+        duration = 1000
+    } else if (level == 2) {
+        duration = 800
+    } else if (level == 3) {
+        duration = 600
+    } else if (level == 4) {
+        duration = 400
+    } else if (level == 5) {
+        duration = 200
+    }
+}));
 
 function randomSquare() {
     squares.forEach(square => {
@@ -29,12 +48,13 @@ function randomSquare() {
 
 
 function moveMole() {
-    timer = setInterval(randomSquare, 800);
+    timer = setInterval(randomSquare, duration);
 }
 // moveMole();
 
 startGameBtn.addEventListener('click', () => {
     startGameBtn.style.display = 'none';
+    ulLevelsBtn.style.visibility = 'hidden';
     moveMole();
     decrementTime()
 });
@@ -63,6 +83,7 @@ function countDown() {
         gameInfo.style.color = "white"
 
         document.querySelector('body').style.backgroundColor = 'red';
+        ulLevelsBtn.style.visibility = 'visible';
         newGameBtn.style.display = 'block';
     }
 }
@@ -77,6 +98,8 @@ newGameBtn.addEventListener('click', function () {
     newGameBtn.style.display = 'none';
     gameInfo.innerText = `Your Previous Score was ${result}`
     gameInfo.style.color = "rgb(83, 252, 5)"
+
+    ulLevelsBtn.style.visibility = 'hidden';
     newGame();
 })
 
@@ -89,4 +112,3 @@ function newGame() {
     moveMole();
     decrementTime();
 }
-
