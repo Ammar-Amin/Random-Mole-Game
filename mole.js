@@ -4,8 +4,8 @@ const score = document.getElementById('score');
 const timeLeft = document.getElementById('timeLeft');
 const mole = document.querySelector('.mole');
 const gameInfo = document.querySelector('#info')
-const newGameBtn = document.querySelector('.newGame');
 const startGameBtn = document.querySelector('.startGame');
+const newGameBtn = document.querySelector('.newGame');
 const ulLevelsBtn = document.querySelector('.btn-group');
 
 let hitValue;
@@ -33,6 +33,7 @@ levelsBtn.forEach((btn) => btn.addEventListener('click', function (e) {
     }
 }));
 
+
 function randomSquare() {
     squares.forEach(square => {
         square.classList.remove('mole');
@@ -41,6 +42,8 @@ function randomSquare() {
     let randomSquare = squares[Math.floor(Math.random() * 9)];
     randomSquare.classList.add('mole');
     // console.log(randomSquare)
+    randomSquare.style.background = 'white'
+    setTimeout(() => randomSquare.style.backgroundColor = '', 100)
 
     hitValue = randomSquare.id;
 }
@@ -53,11 +56,20 @@ function moveMole() {
 // moveMole();
 
 startGameBtn.addEventListener('click', () => {
-    startGameBtn.style.display = 'none';
-    ulLevelsBtn.style.visibility = 'hidden';
+    hideBtns();
     moveMole();
     decrementTime()
 });
+
+function hideBtns() {
+    startGameBtn.style.display = 'none';
+    ulLevelsBtn.style.visibility = 'hidden';
+}
+
+function showBtns() {
+    ulLevelsBtn.style.visibility = 'visible';
+    newGameBtn.style.display = 'block';
+}
 
 squares.forEach(square => {
     square.addEventListener('click', () => {
@@ -83,8 +95,7 @@ function countDown() {
         gameInfo.style.color = "white"
 
         document.querySelector('body').style.backgroundColor = 'red';
-        ulLevelsBtn.style.visibility = 'visible';
-        newGameBtn.style.display = 'block';
+        showBtns()
     }
 }
 
